@@ -47,7 +47,7 @@ app.get('/articles', (request, response) => {
 
 app.post('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-// The following line of code corresponds with number 3 (database/model). In this step we are sending the query to the database to create an article. The database will send a response that it is complete, or it will give back an error if one is 'catch'ed. The article method that interacts with this piece of server.js is the Article.prototype.insertRecord, which is the function used for when a request to make a new article is made from the 'client' or 'view' end. This step corresponds to the Create in CRUD.
+// The following line of code corresponds with number 3 (server to database/model). In this step we are sending the query to the database to create an article. The database will send a response that it is complete, or it will give back an error if one is 'catch'ed. The article method that interacts with this piece of server.js is the Article.prototype.insertRecord, which is the function used for when a request to make a new article is made from the 'client' or 'view' end. This step corresponds to the Create in CRUD.
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
@@ -72,7 +72,8 @@ app.post('/articles', (request, response) => {
 
 app.put('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This corresponds with number 3 of the diagram. If you are editing an existing article on the client side, this functionality is the server querying the database to update the selected article(s). This is the Update portion of CRUD.
+
   client.query(
     ` `, []
   )
@@ -86,7 +87,8 @@ app.put('/articles/:id', (request, response) => {
 
 app.delete('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // PUT YOUR RESPONSE HERE
+  // This fucntionality is taking number 2 (request), then it creates number 3 (query), and the .then and the .catch are number 4 (result) which in turn the server sends as a response to the user (number 5).
+
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
