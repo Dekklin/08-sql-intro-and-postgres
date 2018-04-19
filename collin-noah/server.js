@@ -37,7 +37,7 @@ app.get('/new', (request, response) => {
 app.get('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // the app.get above is #3, and the client.query is #4;  It is the Read in the crud; article.js - Article.fetchAll
-  client.query('')
+  client.query('SELECT * FROM articles')
     .then(function(result) {
       response.send(result.rows);
     })
@@ -76,9 +76,17 @@ app.put('/articles/:id', (request, response) => {
   // This corresponds with number 3 of the diagram. If you are editing an existing article on the client side, this functionality is the server querying the database to update the selected article(s). This is the Update portion of CRUD. article.js - Article.prototype.updateRecord.
 
   client.query(
-    `UPDATE articles SET request    WHERE `,
+    `UPDATE articles
+    SET
+    title=$1, author=$2, "authorURL=$3, category = $4, "publishedOn"=$5, body=$7; `,
     [
-
+      request.body.title,
+      request.body.author,
+      request.body.authorUrl,
+      request.body.category,
+      request.body.publishedOn,
+      request.body.body,
+      request.params.id
 
     ]
   )
